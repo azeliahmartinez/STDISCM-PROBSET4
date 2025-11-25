@@ -18,7 +18,10 @@ OcrWorkerPool::~OcrWorkerPool() = default;
     long long ms = 0;
 
     bool ok = false;
+
     try {
+        // Serialize access to Tesseract – it is NOT thread-safe
+        std::lock_guard<std::mutex> lock(engineMutex_);
         ok = engine_.recognize(req.image_data(), text, ms);
     } catch (const std::exception &ex) {
         std::cerr << "[OCR] Exception in ProcessRequest: " << ex.what() << "\n";
