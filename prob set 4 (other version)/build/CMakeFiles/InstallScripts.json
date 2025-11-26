@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/cmake_install.cmake",
+		"/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/server/cmake_install.cmake",
+		"/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/client/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

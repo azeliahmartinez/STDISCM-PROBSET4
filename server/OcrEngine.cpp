@@ -10,7 +10,7 @@ OcrEngine::OcrEngine()
     // Try TESSDATA_PREFIX first, else Homebrew default
     const char *tessdata = std::getenv("TESSDATA_PREFIX");
     if (!tessdata) {
-        tessdata = "/usr/local/share/tessdata";
+        tessdata = "/opt/homebrew/share/tessdata";
     }
 
     int rc = tess_.Init(tessdata, "eng");

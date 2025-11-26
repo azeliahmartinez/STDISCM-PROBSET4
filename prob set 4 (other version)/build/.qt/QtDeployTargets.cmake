@@ -1,0 +1,6 @@
+set(__QT_DEPLOY_TARGET_ocr_server_FILE /Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/server/ocr_server)
+set(__QT_DEPLOY_TARGET_ocr_server_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_ocr_client_FILE /Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/client/ocr_client)
+set(__QT_DEPLOY_TARGET_ocr_client_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_ocr_proto_FILE /Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/libocr_proto.a)
+set(__QT_DEPLOY_TARGET_ocr_proto_TYPE STATIC_LIBRARY)

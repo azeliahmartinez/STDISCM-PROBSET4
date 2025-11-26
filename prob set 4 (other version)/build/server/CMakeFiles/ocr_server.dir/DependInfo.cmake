@@ -1,0 +1,26 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "" "server/ocr_server_autogen/timestamp" "custom" "server/ocr_server_autogen/deps"
+  "/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/server/OcrServiceImpl.cpp" "server/CMakeFiles/ocr_server.dir/OcrServiceImpl.cpp.o" "gcc" "server/CMakeFiles/ocr_server.dir/OcrServiceImpl.cpp.o.d"
+  "/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/server/main.cpp" "server/CMakeFiles/ocr_server.dir/main.cpp.o" "gcc" "server/CMakeFiles/ocr_server.dir/main.cpp.o.d"
+  "/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/server/ocr_server_autogen/mocs_compilation.cpp" "server/CMakeFiles/ocr_server.dir/ocr_server_autogen/mocs_compilation.cpp.o" "gcc" "server/CMakeFiles/ocr_server.dir/ocr_server_autogen/mocs_compilation.cpp.o.d"
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

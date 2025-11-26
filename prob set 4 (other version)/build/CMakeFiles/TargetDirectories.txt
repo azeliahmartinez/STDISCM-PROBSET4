@@ -1,0 +1,15 @@
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/CMakeFiles/ocr_proto.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/CMakeFiles/edit_cache.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/CMakeFiles/rebuild_cache.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/CMakeFiles/ocr_proto_autogen_timestamp_deps.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/CMakeFiles/ocr_proto_autogen.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/server/CMakeFiles/ocr_server.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/server/CMakeFiles/edit_cache.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/server/CMakeFiles/rebuild_cache.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/server/CMakeFiles/ocr_server_autogen_timestamp_deps.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/server/CMakeFiles/ocr_server_autogen.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/client/CMakeFiles/ocr_client.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/client/CMakeFiles/edit_cache.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/client/CMakeFiles/rebuild_cache.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/client/CMakeFiles/ocr_client_autogen_timestamp_deps.dir
+/Users/keishaleighvillanueva/Downloads/college/4Y/stdiscm/prob set 4/prob set 4/build/client/CMakeFiles/ocr_client_autogen.dir
