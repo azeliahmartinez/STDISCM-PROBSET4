@@ -4,7 +4,16 @@
 #include <QPixmap>
 #include <thread>
 
-// represents one OCR card (image + result)
+// ============================
+// Server address configuration
+// ============================
+// YOUR IP (server) = 10.5.146.131
+static constexpr const char* kServerAddress = "10.143.25.221:50051";
+
+// ============================
+// ImageItemWidget
+// ============================
+
 ImageItemWidget::ImageItemWidget(QWidget* parent)
     : QWidget(parent),
       imgLabel(new QLabel(this)),
@@ -49,12 +58,15 @@ void ImageItemWidget::setResult(const QString& text) {
     resultLabel->setText(text);
 }
 
-// creates a channel to the server and sends OCR requests
+// ============================
+// OcrClient
+// ============================
+
 OcrClient::OcrClient(QObject* parent)
     : QObject(parent)
 {
     auto channel = grpc::CreateChannel(
-        "localhost:50051",
+        kServerAddress,
         grpc::InsecureChannelCredentials()
     );
     stub_ = ocr::OcrService::NewStub(channel);
@@ -94,7 +106,10 @@ void OcrClient::sendImage(
     }).detach();
 }
 
-// the entire interface
+// ============================
+// MainWindow
+// ============================
+
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
 {
@@ -104,7 +119,6 @@ MainWindow::MainWindow(QWidget* parent)
     centralWidget_ = new QWidget(this);
     mainLayout_ = new QVBoxLayout(centralWidget_);
 
-    // upload button
     uploadButton_ = new QPushButton("Upload Images", this);
     uploadButton_->setStyleSheet(
         "background-color: #3d3d3d;"
@@ -115,7 +129,6 @@ MainWindow::MainWindow(QWidget* parent)
         "border-radius: 4px;"
     );
 
-    // progress bar
     progressBar_ = new QProgressBar(this);
     progressBar_->setRange(0, 100);
     progressBar_->setStyleSheet(
@@ -131,7 +144,6 @@ MainWindow::MainWindow(QWidget* parent)
         "}"
     );
 
-    // scroll area
     scrollArea_ = new QScrollArea(this);
     scrollArea_->setStyleSheet("background-color: #303030;");
     scrollArea_->setWidgetResizable(true);
@@ -145,7 +157,6 @@ MainWindow::MainWindow(QWidget* parent)
     scrollContent_->setLayout(gridLayout_);
     scrollArea_->setWidget(scrollContent_);
 
-    // add to layout
     mainLayout_->addWidget(uploadButton_);
     mainLayout_->addWidget(progressBar_);
     mainLayout_->addWidget(scrollArea_);
@@ -160,7 +171,6 @@ MainWindow::MainWindow(QWidget* parent)
             this, &MainWindow::onResult);
 }
 
-// clears old results when starting a new batch
 void MainWindow::clearUI() {
     QLayoutItem* item;
     while ((item = gridLayout_->takeAt(0)) != nullptr) {
@@ -182,7 +192,6 @@ void MainWindow::prepareNewBatchIfNeeded() {
     }
 }
 
-// updates the progress bar based on completed items
 void MainWindow::updateProgress() {
     if (totalImages_ == 0) return;
 
@@ -193,7 +202,6 @@ void MainWindow::updateProgress() {
         batchFinished_ = true;
 }
 
-// sends each image to the server for asynchronous OCR processing
 void MainWindow::onUploadClicked() {
     prepareNewBatchIfNeeded();
 
@@ -211,32 +219,29 @@ void MainWindow::onUploadClicked() {
         int index = nextIndex_++;
         totalImages_++;
 
-        // create card widget
         auto* item = new ImageItemWidget(scrollContent_);
         item->setImage(img);
         item->setResult("In progress...");
         widgets_[index] = item;
 
-        // add to grid in correct ordered position
         int row = index / columns_;
         int col = index % columns_;
         gridLayout_->addWidget(item, row, col);
 
-        // convert PNG to send
         QByteArray data;
         QBuffer buffer(&data);
         buffer.open(QIODevice::WriteOnly);
         img.save(&buffer, "PNG");
 
-        // send to server
-        client_.sendImage(currentBatchId_, index,
-                          QFileInfo(path).fileName(), data);
+        client_.sendImage(
+            currentBatchId_, index,
+            QFileInfo(path).fileName(), data
+        );
     }
 
     updateProgress();
 }
 
-// updates the EXACT widget corresponding to that image index
 void MainWindow::onResult(
     qint64 batchId,
     int index,

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libocr_proto.a CMakeFiles/ocr_proto.dir/ocr_proto_autogen/mocs_compilation.cpp.o CMakeFiles/ocr_proto.dir/ocr.pb.cc.o CMakeFiles/ocr_proto.dir/ocr.grpc.pb.cc.o
-/usr/bin/ranlib libocr_proto.a
