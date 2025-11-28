@@ -1,0 +1,15 @@
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/CMakeFiles/ocr_proto.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/CMakeFiles/edit_cache.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/CMakeFiles/rebuild_cache.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/CMakeFiles/ocr_proto_autogen_timestamp_deps.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/CMakeFiles/ocr_proto_autogen.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/server/CMakeFiles/ocr_server.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/server/CMakeFiles/edit_cache.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/server/CMakeFiles/rebuild_cache.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/server/CMakeFiles/ocr_server_autogen_timestamp_deps.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/server/CMakeFiles/ocr_server_autogen.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/client/CMakeFiles/ocr_client.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/client/CMakeFiles/edit_cache.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/client/CMakeFiles/rebuild_cache.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/client/CMakeFiles/ocr_client_autogen_timestamp_deps.dir
+/Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/client/CMakeFiles/ocr_client_autogen.dir

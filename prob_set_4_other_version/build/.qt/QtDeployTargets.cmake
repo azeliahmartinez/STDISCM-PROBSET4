@@ -1,0 +1,6 @@
+set(__QT_DEPLOY_TARGET_ocr_server_FILE /Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/server/ocr_server)
+set(__QT_DEPLOY_TARGET_ocr_server_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_ocr_client_FILE /Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/client/ocr_client)
+set(__QT_DEPLOY_TARGET_ocr_client_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_ocr_proto_FILE /Users/zae/Desktop/STDISCM-PROBSET4/prob_set_4_other_version/build/libocr_proto.a)
+set(__QT_DEPLOY_TARGET_ocr_proto_TYPE STATIC_LIBRARY)

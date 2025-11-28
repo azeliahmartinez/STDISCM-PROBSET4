@@ -1,0 +1,10 @@
+# Hashes of file build rules.
+15e0c33794e1e889d7a35d202c35fcf2 CMakeFiles/ocr_proto_autogen
+15e0c33794e1e889d7a35d202c35fcf2 CMakeFiles/ocr_proto_autogen_timestamp_deps
+38ae7dfd55c1f3c4aea8440dd7b49dc5 client/CMakeFiles/ocr_client_autogen
+a87506164619387c5a337178fb0f8c06 client/ocr_client_autogen/timestamp
+a8a01bc7b03a5c1fc704282c869122c3 ocr.grpc.pb.cc
+0cccbd7f135c8d810442c94d4330e329 ocr.pb.cc
+85243534ba0efffbab62a647d1b8b65d ocr_proto_autogen/timestamp
+10fc21b330ab29e38de5cb858d645e72 server/CMakeFiles/ocr_server_autogen
+d646a58efe1c446cfe92d5c7c68bb168 server/ocr_server_autogen/timestamp
