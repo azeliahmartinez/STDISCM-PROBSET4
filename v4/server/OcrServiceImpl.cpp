@@ -12,7 +12,7 @@
 #include <leptonica/allheaders.h>
 
 // Artificial delay per OCR job (for demo visibility)
-static constexpr int kArtificialDelayMs = 300;
+static constexpr int kArtificialDelayMs = 1000;
 
 // holds all data needed for processing one image
 struct OcrJob {
