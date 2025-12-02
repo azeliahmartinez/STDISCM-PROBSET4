@@ -59,11 +59,18 @@ void ImageItemWidget::setResult(const QString& text) {
 OcrClient::OcrClient(QObject* parent)
     : QObject(parent)
 {
+    std::string serverAddress = "localhost:50051";
+    std::cout << "[Client] Creating channel to server at " 
+              << serverAddress << "..." << std::endl;
+
     auto channel = grpc::CreateChannel(
-        kServerAddress,
+        serverAddress,
         grpc::InsecureChannelCredentials()
     );
+
     stub_ = ocr::OcrService::NewStub(channel);
+
+    std::cout << "[Client] Channel created. Ready to send OCR requests." << std::endl;
 }
 
 void OcrClient::sendImage(
@@ -208,14 +215,30 @@ void MainWindow::onUploadClicked() {
         "Images (*.png *.jpg *.jpeg *.bmp *.tif *.tiff)"
     );
 
-    if (files.isEmpty()) return;
+    if (files.isEmpty()) {
+        std::cout << "[Client] No images were selected." << std::endl;
+        return;
+    }
+
+    std::cout << "\n[Client] Starting new batch. Batch ID = " 
+              << currentBatchId_ << std::endl;
+    std::cout << "[Client] Total images selected: " 
+              << files.size() << std::endl;
 
     for (const QString& path : files) {
         QImage img(path);
-        if (img.isNull()) continue;
+        if (img.isNull()) {
+            std::cout << "[Client] Invalid image skipped: " 
+                      << path.toStdString() << std::endl;
+            continue;
+        }
 
         int index = nextIndex_++;
         totalImages_++;
+
+        std::cout << "[Client] Uploading image: " 
+                  << QFileInfo(path).fileName().toStdString()
+                  << " | Index: " << index << std::endl;
 
         // create card widget
         auto* item = new ImageItemWidget(scrollContent_);
@@ -254,14 +277,29 @@ void MainWindow::onResult(
 {
     if (batchId != currentBatchId_) return;
 
+    std::cout << "[Client] Received result for index " << index
+              << " | File: " << filename.toStdString()
+              << " | Success: " << (success ? "true" : "false")
+              << " | Time: " << ms << " ms" << std::endl;
+
     completed_++;
     updateProgress();
 
     auto* item = widgets_.value(index);
     if (!item) return;
 
-    if (!success)
+    if (!success) {
+        std::cout << "[Client] ERROR for file " 
+                  << filename.toStdString() 
+                  << ": " << error.toStdString() << std::endl;
         item->setResult("Error: " + error);
-    else
+    } else {
         item->setResult(text);
+    }
+
+    if (completed_ == totalImages_) {
+        std::cout << "[Client] Batch " << batchId 
+                  << " processing complete! 100%" << std::endl;
+    }
 }
+

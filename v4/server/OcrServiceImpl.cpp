@@ -11,6 +11,9 @@
 #include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
 
+// Artificial delay per OCR job (for demo visibility)
+static constexpr int kArtificialDelayMs = 300;
+
 // holds all data needed for processing one image
 struct OcrJob {
     int batchId;
@@ -76,15 +79,15 @@ public:
             if (std::filesystem::exists("/opt/homebrew/share/tessdata/eng.traineddata")) {
                 tessdata = "/opt/homebrew/share/tessdata";
             }
-            // Intel Homebrew (common)
+            // Intel Homebrew 
             else if (std::filesystem::exists("/usr/local/share/tessdata/eng.traineddata")) {
                 tessdata = "/usr/local/share/tessdata";
             }
-            // Apple Homebrew Cellar symlink
+            // Apple Homebrew Cellar 
             else if (std::filesystem::exists("/opt/homebrew/opt/tesseract/share/tessdata/eng.traineddata")) {
                 tessdata = "/opt/homebrew/opt/tesseract/share/tessdata";
             }
-            // Intel Cellar (your path)
+            // Intel Cellar 
             else if (std::filesystem::exists("/usr/local/Cellar/tesseract/5.5.1_1/share/tessdata/eng.traineddata")) {
                 tessdata = "/usr/local/Cellar/tesseract/5.5.1_1/share/tessdata";
             }
@@ -171,6 +174,13 @@ private:
             long long ms = 0;
             bool ok = engine.recognize(job.imageData, text, ms);
 
+            // Artificial delay to slow down completion for demo visibility
+            if (kArtificialDelayMs > 0) {
+                std::this_thread::sleep_for(
+                    std::chrono::milliseconds(kArtificialDelayMs)
+                );
+            }
+
             *(job.outText) = ok ? text : "";
             *(job.outSuccess) = ok;
             *(job.outMs) = ms;
@@ -196,11 +206,17 @@ grpc::Status OcrServiceImpl::RecognizeImage(
 {
     static WorkerPool pool(workerCount_);
 
+    std::cout << "[Server] Received image request from client:" << std::endl;
+    std::cout << "         Filename: " << req->filename() 
+              << " | Index: " << req->image_index()
+              << " | Batch: " << req->batch_id() << std::endl;
+
     std::string text, error;
     long long ms = 0;
     bool success = false;
     bool finished = false;
 
+    // build OCR Job
     OcrJob job;
     job.batchId = req->batch_id();
     job.index = req->image_index();
@@ -213,12 +229,24 @@ grpc::Status OcrServiceImpl::RecognizeImage(
     job.outError = &error;
     job.finishedFlag = &finished;
 
+    // push job into worker pool
     pool.pushJob(job);
+    std::cout << "[Server] Job pushed to worker pool..." << std::endl;
 
+    // busy wait until job is done
     while (!finished) {
         std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
 
+    if (success) {
+        std::cout << "[Server] OCR SUCCESS for [" << job.filename << "]" 
+                  << " | Time: " << ms << " ms" << std::endl;
+    } else {
+        std::cout << "[Server] OCR FAILED for [" << job.filename << "]"
+                  << " | Error: " << error << std::endl;
+    }
+
+    // fill gRPC response
     res->set_batch_id(job.batchId);
     res->set_image_index(job.index);
     res->set_filename(job.filename);
@@ -226,6 +254,8 @@ grpc::Status OcrServiceImpl::RecognizeImage(
     res->set_success(success);
     res->set_error_message(error);
     res->set_processing_time_ms(ms);
+
+    std::cout << "[Server] Sending OCR response back to client..." << std::endl;
 
     return grpc::Status::OK;
 }
