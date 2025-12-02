@@ -59,18 +59,17 @@ void ImageItemWidget::setResult(const QString& text) {
 OcrClient::OcrClient(QObject* parent)
     : QObject(parent)
 {
-    std::string serverAddress = "localhost:50051";
-    std::cout << "[Client] Creating channel to server at " 
-              << serverAddress << "..." << std::endl;
+    std::cout << "[Client] Creating channel to server at "
+              << kServerAddress << "..." << std::endl;
 
     auto channel = grpc::CreateChannel(
-        serverAddress,
+        kServerAddress,
         grpc::InsecureChannelCredentials()
     );
 
     stub_ = ocr::OcrService::NewStub(channel);
 
-    std::cout << "[Client] Channel created. Ready to send OCR requests." << std::endl;
+    std::cout << "[Client] Connection established (stub created)." << std::endl;
 }
 
 void OcrClient::sendImage(
