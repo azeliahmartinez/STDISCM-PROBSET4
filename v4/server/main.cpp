@@ -19,6 +19,7 @@
 #include <iostream>
 
 int main() {
+    const std::string lanIP = "192.168.1.12";
     const std::string address = "0.0.0.0:50051";
 
     std::cout << "[Server] Initializing OCR Service..." << std::endl;
@@ -31,9 +32,10 @@ int main() {
     std::cout << "[Server] Starting server with 8 worker threads..." << std::endl;
 
     std::unique_ptr<grpc::Server> server(builder.BuildAndStart());
-    
+
     std::cout << "[Server] Server is now running." << std::endl;
-    std::cout << "[Server] Listening on " << address << std::endl;
+    std::cout << "[Server] Server reachable at: " 
+          << lanIP << ":50051" << std::endl;
     std::cout << "[Server] Waiting for client connections..." << std::endl;
 
     server->Wait();
