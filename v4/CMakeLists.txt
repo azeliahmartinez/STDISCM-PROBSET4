@@ -8,37 +8,30 @@ project(distributed_ocr LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# ----------------------------------------------------------------------
 # Homebrew locations for Protobuf + gRPC
-# ----------------------------------------------------------------------
 set(Protobuf_DIR "/opt/homebrew/lib/cmake/protobuf")
 set(gRPC_DIR "/opt/homebrew/opt/grpc/lib/cmake/grpc")
 
 find_package(Protobuf CONFIG REQUIRED)
 find_package(gRPC CONFIG REQUIRED)
 
-# ----------------------------------------------------------------------
+
 # Qt (Widgets)
-# ----------------------------------------------------------------------
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
-# ----------------------------------------------------------------------
-# Tesseract (Homebrew, no CMake config)
-# ----------------------------------------------------------------------
+
+# Tesseract
 set(TESSERACT_ROOT "/opt/homebrew/opt/tesseract")
 include_directories(${TESSERACT_ROOT}/include)
 link_directories(${TESSERACT_ROOT}/lib)
 
-# --- Leptonica (for pixReadMem, pixDestroy) ---
+# Leptonica 
 set(LEPTONICA_ROOT "/opt/homebrew/opt/leptonica")
 include_directories(${LEPTONICA_ROOT}/include)
 link_directories(${LEPTONICA_ROOT}/lib)
 
-# ----------------------------------------------------------------------
+
 # Helper functions to generate protobuf + gRPC C++ sources
-# ----------------------------------------------------------------------
-# Usage:
-#   protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS file1.proto file2.proto)
 function(protobuf_generate_cpp SRCS HDRS)
     if (NOT ARGN)
         message(FATAL_ERROR "protobuf_generate_cpp() called with no .proto files")
@@ -70,8 +63,7 @@ function(protobuf_generate_cpp SRCS HDRS)
     set(${HDRS} ${all_hdrs} PARENT_SCOPE)
 endfunction()
 
-# Usage:
-#   grpc_generate_cpp(GRPC_SRCS GRPC_HDRS file1.proto file2.proto)
+
 function(grpc_generate_cpp SRCS HDRS)
     if (NOT ARGN)
         message(FATAL_ERROR "grpc_generate_cpp() called with no .proto files")
@@ -104,9 +96,8 @@ function(grpc_generate_cpp SRCS HDRS)
     set(${HDRS} ${all_hdrs} PARENT_SCOPE)
 endfunction()
 
-# ----------------------------------------------------------------------
+
 # Generate protobuf / gRPC C++ files from our proto
-# ----------------------------------------------------------------------
 set(PROTO_DIR ${CMAKE_CURRENT_SOURCE_DIR}/proto)
 set(PROTO_FILE ${PROTO_DIR}/ocr.proto)
 
@@ -121,8 +112,8 @@ add_library(ocr_proto STATIC
 )
 
 target_include_directories(ocr_proto PUBLIC
-    ${CMAKE_CURRENT_BINARY_DIR}   # for generated *.pb.h
-    ${PROTO_DIR}                  # for #include "ocr.proto" if ever needed
+    ${CMAKE_CURRENT_BINARY_DIR}   
+    ${PROTO_DIR}                  
 )
 
 target_link_libraries(ocr_proto PUBLIC
@@ -130,8 +121,7 @@ target_link_libraries(ocr_proto PUBLIC
     protobuf::libprotobuf
 )
 
-# ----------------------------------------------------------------------
+
 # Subdirectories (client + server)
-# ----------------------------------------------------------------------
 add_subdirectory(server)
 add_subdirectory(client)

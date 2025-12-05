@@ -4,10 +4,8 @@
 #include <QPixmap>
 #include <thread>
 
-// ============================
-// Server address configuration
-// ============================
 
+// Server address configuration
 static constexpr const char* kServerAddress = "192.168.1.12:50051";
 
 // represents one OCR card (image + result)
@@ -264,7 +262,7 @@ void MainWindow::onUploadClicked() {
     updateProgress();
 }
 
-// updates the EXACT widget corresponding to that image index
+// updates the exact widget corresponding to that image index
 void MainWindow::onResult(
     qint64 batchId,
     int index,

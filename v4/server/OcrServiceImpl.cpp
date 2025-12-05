@@ -11,7 +11,7 @@
 #include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
 
-// Artificial delay per OCR job (for demo visibility)
+// artificial delay per OCR job (for demo visibility)
 static constexpr int kArtificialDelayMs = 1000;
 
 // holds all data needed for processing one image
@@ -92,7 +92,7 @@ public:
                 tessdata = "/usr/local/Cellar/tesseract/5.5.1_1/share/tessdata";
             }
             else {
-                tessdata = ".";  // as last fallback
+                tessdata = ".";  
             }
         }
 
